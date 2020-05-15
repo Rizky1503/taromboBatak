@@ -1,0 +1,132 @@
+@extends('layout.index')
+
+@section('content')
+
+<section class="content">
+  <div class="container">
+    <div class="row">
+      <div class="col-12" >
+        <div class="card">
+          <div class="card-body">
+            <table  id="example" class="display nowrap" style="width:100%">
+              <thead>
+                <tr>
+                  <th scope="col">No</th>
+                  <th scope="col">Nama</th>
+                  <th scope="col">Marga</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">No. Telpon</th>
+                  <th scope="col">Alamat</th>
+                  <th scope="col">TTL</th>
+                  <th scope="col">Provinsi Kelahiran</th>
+                  <th scope="col">Kota Kelahiran</th>
+                  <th scope="col">Orangtua Laki-Laki</th>
+                  <th scope="col">Referensi oleh</th>
+                  <th scope="col">Status user</th>
+                  <th scope="col">Status admin</th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach($list as $key => $value)
+                <tr>
+                  <td>{{ $key + 1 }}</td>
+                  <td>{{ $value->nama}}</td>
+                  <td>{{ $value->nama_marga }}</td>
+                  <td>{{ $value->email }}</td>
+                  <td>{{ $value->no_telpon }}</td>
+                  <td>{{ $value->alamat }}</td>
+                  <td>{{ \Carbon\Carbon::parse($value->tanggal_lahir)->format('d F Y') }}</td>
+                  <td>{{ $value->provinsi_kelahiran }}</td>
+                  <td>{{ $value->kota_kelahiran }}</td>
+                  <td>{{ $value->nama_ayah }}</td>
+                  <td>{{ $value->referensi }}</td>
+                  <td>
+                    @if($value->status_member == 'Approved')
+                      <a href="#" class="btn btn-success" data-toggle="modal" data-target="#modal-default">Approved</a>
+                    @elseif($value->status_member == 'Requested')
+                      <a href="#" class="btn btn-warning" data-toggle="modal" data-target="#modal-default">Requested</a>
+                    @else
+                      <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#modal-default">Rejected</a>
+                    @endif
+                  </td>
+                  <td>
+                    @if($value->status_admin == 0)
+                      <a href="#" class="btn btn-danger">Tidak Aktif</a>
+                    @else
+                      <a href="#" class="btn btn-success">Aktif</a>
+                    @endif
+
+                  </td>
+                </tr>
+                @endforeach
+              </tbody>
+              
+            </table>
+          </div>
+          <!-- /.card-body -->
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="modal-default">
+    <div class="modal-dialog">
+    <div class="modal-content">
+    <div class="modal-header">
+    <h4 class="modal-title">Rubah Status Member</h4>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+    <div class="modal-body">
+    <div class="form-group">
+      <select class="form-control">
+        <option>Requested</option>
+        <option>Aproved</option>
+        <option>Rejected</option>
+      </select>
+    </div>
+    </div>
+    <div class="modal-footer justify-content-between">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Keluar</button>
+    <button type="button" class="btn btn-primary btn btn-success swalDefaultSuccess">Simpan</button>
+    </div>
+    </div>
+    <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+    </div>
+  </div>
+</section>
+@endsection
+
+<script src="{{ asset('public/theme/plugins/jquery/jquery.min.js')}}"></script>
+
+<script>
+  $(document).ready(function() {
+    $('#example').DataTable( {
+        "scrollX": true
+    } );
+
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000
+    });
+
+    $('.swalDefaultSuccess').click(function() {
+      Toast.fire({
+        icon: 'success',
+        title: 'Status Member Berhasil Dirubah'
+      })
+    });
+  } );
+
+</script>
+
+<style type="text/css">
+  div.dataTables_wrapper {
+        width: 100%;
+        margin: 0 auto;
+    }
+</style>
