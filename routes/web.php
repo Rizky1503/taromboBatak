@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::group(['as'=>'Home.'], function(){
-    Route::get('/', 'HomeController@index')->name('index');
+    Route::get('/', 'HomeController@login')->name('login');
     Route::get('/login', 'HomeController@login')->name('login');
     Route::get('/loginApi', 'HomeController@loginApi')->name('loginApi');
     Route::get('/Logout', 'HomeController@Logout')->name('Logout');
