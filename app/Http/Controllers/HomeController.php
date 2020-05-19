@@ -123,7 +123,7 @@ class HomeController extends BaseController
 
         echo "<option value=''>--Nama Orang Tua Laki-Laki--</option>";
     	if ($ayah) {
-    		foreach ($ayah as $key => $value) {
+    		foreach ($ayah as $key => $value) { 
     			echo "<option value='".$value->id_member."'>".$value->nama."</option>";
     		}
     	}else{
