@@ -95,7 +95,7 @@ class HomeController extends BaseController
     	    'member' => $data_member,
     	]);
     }
-
+ 
     public function get_kota(Request $request){
         $client = new \GuzzleHttp\Client();
         $response = $client->request('POST', ENV('APP_URL_API').'member/get_kota', [
@@ -124,7 +124,7 @@ class HomeController extends BaseController
         echo "<option value=''>--Nama Orang Tua Laki-Laki--</option>";
     	if ($ayah) {
     		foreach ($ayah as $key => $value) {
-    			echo "<option value='".$value->nama."'>".$value->nama."</option>";
+    			echo "<option value='".$value->id_member."'>".$value->nama."</option>";
     		}
     	}else{
     		echo "<option value='0'>Pusat Silsilah</option>";
