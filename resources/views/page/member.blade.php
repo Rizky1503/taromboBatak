@@ -42,11 +42,11 @@
                   <td>{{ $value->referensi }}</td>
                   <td>
                     @if($value->status_member == 'Approved')
-                      <a href="#" class="btn btn-success" data-toggle="modal" data-target="#modal-default">Approved</a>
+                      <a href="#" class="btn btn-success" data-toggle="modal" onclick="passdatamember('{{ $value->id_member }}')" data-target="#modal-default">Approved</a>
                     @elseif($value->status_member == 'Requested')
-                      <a href="#" class="btn btn-warning" data-toggle="modal" data-target="#modal-default">Requested</a>
+                      <a href="#" class="btn btn-warning" data-toggle="modal" onclick="passdatamember('{{ $value->id_member }}')" data-target="#modal-default">Requested</a>
                     @else
-                      <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#modal-default">Rejected</a>
+                      <a href="#" class="btn btn-danger" data-toggle="modal" onclick="passdatamember('{{ $value->id_member }}')" data-target="#modal-default">Rejected</a>
                     @endif
                   </td>
                   <td>
@@ -69,31 +69,30 @@
     </div>
 
     <div class="modal fade" id="modal-default">
-    <div class="modal-dialog">
-    <div class="modal-content">
-    <div class="modal-header">
-    <h4 class="modal-title">Rubah Status Member</h4>
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-    </div>
-    <div class="modal-body">
-    <div class="form-group">
-      <select class="form-control">
-        <option>Requested</option>
-        <option>Aproved</option>
-        <option>Rejected</option>
-      </select>
-    </div>
-    </div>
-    <div class="modal-footer justify-content-between">
-    <button type="button" class="btn btn-default" data-dismiss="modal">Keluar</button>
-    <button type="button" class="btn btn-primary btn btn-success swalDefaultSuccess">Simpan</button>
-    </div>
-    </div>
-    <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+          <h4 class="modal-title">Rubah Status Member</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+            <div class="modal-body">
+            <input type="hidden" name="id_member" id="id_member" value="">
+            <div class="form-group">
+              <select class="form-control" id="status_member">
+                <option>Requested</option>
+                <option>Approved</option>
+                <option>Rejected</option>
+              </select>
+            </div>
+          </div>
+        <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Keluar</button>
+        <button type="button" class="btn btn-success" onclick="updatestatusmember()">Simpan</button>
+        </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -102,6 +101,22 @@
 <script src="{{ asset('public/theme/plugins/jquery/jquery.min.js')}}"></script>
 
 <script>
+  function passdatamember(val){
+    $('#id_member').val(val)
+  }
+  function updatestatusmember(){
+    $.ajax({
+      type: "GET",
+      url: '{{ route("Member.updatemember")}}',
+      data: {
+        status : $('#status_member').val(),
+      },
+      success: function(responses){  
+        location.reload() 
+      }
+    });
+  }
+
   $(document).ready(function() {
     $('#example').DataTable( {
         "scrollX": true

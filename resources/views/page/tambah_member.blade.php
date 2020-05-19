@@ -19,8 +19,19 @@
 								</div>
 								<div class="col-md-6">
 									<div class="form-group">
+				                        <label>Jenis Kelamin</label>
+				                        <select class="form-control select2bs4" name="jenis_kelamin" style="width: 100%;" required>
+					                        <option value="">--Pilih Jenis Kelamin--</option>
+					                        <option value="L">Laki-Laki</option>
+					                        <option value="P">Perempuan</option>
+					                    </select>
+				                    </div>
+								</div>
+								@if($marga)
+								<div class="col-md-6">
+									<div class="form-group">
 				                        <label>Marga</label>
-				                        <select class="form-control select2bs4" required onchange="getketurunan(this.value)" name="marga" id="marga" style="width: 100%;">
+				                        <select class="form-control select2bs4" required  name="marga" id="marga" style="width: 100%;">
 										  <option value="">--Pilih Marga--</option>
 										  @foreach($marga as $key => $value)
 										  	<option value="{{ $value->id_marga }}">{{ $value->nama_marga }}</option>
@@ -29,10 +40,33 @@
 										</select>
 				                    </div>
 								</div>
+								@else
+								<div class="col-md-6">
+									<div class="form-group">
+				                        <label>Marga</label>
+				                        <input type="text" class="form-control" required="required" name="marga" placeholder="Matondang">
+				                    </div>
+								</div>
+								@endif
+								<div class="col-md-6">
+									<div class="form-group">
+										<label>Keturunan</label>
+										<select class="form-control level" onchange="getketurunan(this.value)" name="level" style="width: 100%">
+										  <option selected="selected">--Pilih Level--</option>
+										  @if($marga)
+										   @for ($i = 1; $i <= 30; $i++)
+										   	<option value="{{ $i }}">Level {{ $i }}</option>
+										    @endfor 
+										  @else
+										  	<option value="1">Level 1</option>
+										  @endif
+										</select>
+									</div>
+								</div>
 								<div class="col-md-6">
 									<div class="form-group">
 				                        <label>Nama Orang Tua Laki - Laki</label>
-				                        <select class="form-control select2bs4" name="nama_ayah" id="nama_ayah" style="width: 100%;" required>
+				                        <select class="form-control level" name="nama_ayah" id="nama_ayah" style="width: 100%;" >
 					                        <option value="">--Nama Orang Tua Laki-Laki--</option>
 					                    </select>
 				                    </div>
@@ -88,7 +122,7 @@
 								<div class="col-md-6">
 									<div class="form-group">
 				                        <label>Referensi oleh</label>
-				                        <select class="form-control select2bs4" name="referensi" style="width: 100%;" required>
+				                        <select class="form-control select2bs4" name="referensi" style="width: 100%;">
 				                        	<option value="">--Pilih Referensi--</option>
 				                        	@foreach($member as $key => $value)
 				                        		<option value="{{$value->nama}}">{{$value->nama}}</option>
@@ -147,6 +181,7 @@
 		  url: '{{ route("Member.keturunan_ke")}}',
 		  data: {
 		    id_marga : $('#marga').val(),
+		    level : val,
 		  },
 		  success: function(responses){  
 		  	$('#nama_ayah').html(responses);  
@@ -169,5 +204,10 @@
 
 		$('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
 		$('[data-mask]').inputmask()
+
+		$(".level").select2({
+		  tags: true,
+		  theme: 'bootstrap4'
+		});
 	})
 </script>

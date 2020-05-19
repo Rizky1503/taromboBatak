@@ -37,6 +37,14 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{ route('Member.SelectMemberSilsilah') }}" class="nav-link">
+              <i class="nav-icon fas fa-tree "></i>
+              <p>
+                Pohon keluarga
+              </p>
+            </a>
+          </li>
 
         <li class="nav-header">DATA MASTER</li>
         <li class="nav-item">
