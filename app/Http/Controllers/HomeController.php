@@ -152,8 +152,13 @@ class HomeController extends BaseController
                     'id_member'          => $request->id_member
                 ]
         ]);
-        $id_member = json_decode($response->getBody());
-        return redirect()->route('Member.HalamanMember',[$id_member]);
+
+        if($request->type == 'keluarga'){
+            return redirect()->route('Member.HalamanMember',$request->id);
+        }else{
+            $id_member = json_decode($response->getBody());
+            return redirect()->route('Member.HalamanMember',[$id_member]);
+        }
     }
 
     public function HalamanMember($id){
@@ -175,6 +180,7 @@ class HomeController extends BaseController
             'provinsi' => $data_provinsi,
             'ayah' => $data_member,
             'member' => $data_member,
+            'id'  => $id
         ]);
     }
 

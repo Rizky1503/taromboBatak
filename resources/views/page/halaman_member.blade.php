@@ -149,6 +149,9 @@
 						<input type="hidden" value="{{$data->istri->alamat}}" name="alamat">
 						<input type="hidden" value="{{$data->istri->id_member}}" name="id_member">
 					@endif
+					<input type="hid" name="jenis" value="keluarga">
+					<input type="hid" name="id" value="{{$id}}">
+
 					<div class="col-md-6">
 						<div class="form-group">
 	                        <label>Nama</label>
@@ -286,7 +289,9 @@
 						<input type="hidden" value="{{$data->suami->id_marga}}" name="marga">					
 						<input type="hidden" value="{{$data->suami->level + 1}}" name="level">					
 						<input type="hidden" value="{{$data->id_relation->id_relationship}}" name="nama_ayah">
-					@endif					
+					@endif	
+					<input type="hid" name="jenis" value="keluarga">
+					<input type="hid" name="id" value="{{$id}}">				
 					<div class="col-md-6">
 						<div class="form-group">
 	                        <label>Nama</label>
