@@ -24,7 +24,7 @@
 								</div> 
 								<div class="col-md-4">
 									<div class="form-group">
-										<label>Marga</label>
+										<label>Member</label>
 										<select class="form-control select2bs4" required name="member" id="member" style="width: 100%;">
 										  <option value="">--Pilih Member--</option>
 										</select>
@@ -32,7 +32,7 @@
 								</div> 
 								<div class="col-md-4">
 									<div class="form-group">
-										<label>Marga</label>
+										<label>Level</label>
 										<select class="form-control select2bs4" required name="urutan" id="urutan" style="width: 100%;">
 										  <option value="">--Pilih Urutan--</option>
 										  <option value="atas">3 ke atas</option>
