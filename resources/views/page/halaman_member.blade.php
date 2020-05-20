@@ -101,7 +101,7 @@
 			              @foreach($data->anak as $key => $value)
 			              	<tr>
 			              		<td>{{$key + 1}}</td>
-			              		<td>{{$value->nama}}</td>
+			              		<td><a href="{{route('Member.HalamanMember',$value->id_member)}}">{{$value->nama}}</a></td>
 			              		<td>{{$value->email}}</td>
 			              		<td>{{$value->no_telpon}}</td>
 			              		<td>{{$value->alamat}}</td>
@@ -121,7 +121,17 @@
 			@if($data->count < 1)
 				<button class="btn btn-success" data-toggle="modal" data-target="#modal-suami">Tambah Data Suami/Istri</button>
 			@endif
-			<button class="btn btn-danger" data-toggle="modal" data-target="#modal-anak" style="margin-left: 5px">Tambah Data Anak</button>
+			@if($data->istri)
+				@if($data->suami)
+					<button class="btn btn-danger" data-toggle="modal" data-target="#modal-anak" style="margin-left: 5px">Tambah Data Anak</button>
+				@endif
+			@endif
+
+			@if($data->suami)
+				@if($data->istri)
+					<button class="btn btn-danger" data-toggle="modal" data-target="#modal-anak" style="margin-left: 5px">Tambah Data Anak</button>
+				@endif
+			@endif
 
 		</div>
 	</div>
@@ -149,8 +159,8 @@
 						<input type="hidden" value="{{$data->istri->alamat}}" name="alamat">
 						<input type="hidden" value="{{$data->istri->id_member}}" name="id_member">
 					@endif
-					<input type="hid" name="jenis" value="keluarga">
-					<input type="hid" name="id" value="{{$id}}">
+					<input type="hidden" name="jenis" value="keluarga">
+					<input type="hidden" name="id" value="{{$id}}">
 
 					<div class="col-md-6">
 						<div class="form-group">

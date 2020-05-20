@@ -126,13 +126,16 @@ class HomeController extends BaseController
     		foreach ($ayah as $key => $value) { 
     			echo "<option value='".$value->id_relationship."'>".$value->nama."</option>";
     		}
+    	}elseif($request->level > 1){
+    		echo "<option value='500'>Level Orang Tua Belum Terdaftar</option>";
     	}else{
-    		echo "<option value='0'>Pusat Silsilah</option>";
-    	}
+            echo "<option value='0'>Pusat Silsilah</option>";
+
+        }
     }
 
     public function store_member(Request $request){
-        	$client = new \GuzzleHttp\Client();
+        $client = new \GuzzleHttp\Client();
         $response = $client->request('POST', ENV('APP_URL_API').'member/tambah_member', [
                 'form_params'  			 => [
                     'id_marga'   		 => $request->marga,
@@ -153,7 +156,7 @@ class HomeController extends BaseController
                 ]
         ]);
 
-        if($request->type == 'keluarga'){
+        if($request->jenis == 'keluarga'){
             return redirect()->route('Member.HalamanMember',$request->id);
         }else{
             $id_member = json_decode($response->getBody());
@@ -226,10 +229,11 @@ class HomeController extends BaseController
                 ]
         ]);
         $pohon = json_decode($response->getBody());
-        
+        // dd($pohon);
         return view('page.pohon_silsilah')->with([
     	    'page' => $this,
     	    'pohon' => $pohon,
+            'request' => $request->urutan
     	]);
     }	
 

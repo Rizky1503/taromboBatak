@@ -30,7 +30,7 @@
                 @foreach($list as $key => $value)
                 <tr>
                   <td>{{ $key + 1 }}</td>
-                  <td>{{ $value->nama}}</td>
+                  <td><a href="{{route('Member.HalamanMember',$value->id_member)}}">{{$value->nama}}</a></td>
                   <td>{{ $value->nama_marga }}</td>
                   <td>{{ $value->email }}</td>
                   <td>{{ $value->no_telpon }}</td>
