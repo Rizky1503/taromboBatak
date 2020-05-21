@@ -127,12 +127,6 @@
 				@endif
 			@endif
 
-			@if($data->suami)
-				@if($data->istri)
-					<button class="btn btn-danger" data-toggle="modal" data-target="#modal-anak" style="margin-left: 5px">Tambah Data Anak</button>
-				@endif
-			@endif
-
 		</div>
 	</div>
 
@@ -300,8 +294,8 @@
 						<input type="hidden" value="{{$data->suami->level + 1}}" name="level">					
 						<input type="hidden" value="{{$data->id_relation->id_relationship}}" name="nama_ayah">
 					@endif	
-					<input type="hid" name="jenis" value="keluarga">
-					<input type="hid" name="id" value="{{$id}}">				
+					<input type="hidden" name="jenis" value="keluarga">
+					<input type="hidden" name="id" value="{{$id}}">				
 					<div class="col-md-6">
 						<div class="form-group">
 	                        <label>Nama</label>

@@ -135,7 +135,8 @@ class HomeController extends BaseController
     }
 
     public function store_member(Request $request){
-        $client = new \GuzzleHttp\Client();
+        $client = new \GuzzleHttp\Client(['timeout' => 8]);
+        
         $response = $client->request('POST', ENV('APP_URL_API').'member/tambah_member', [
                 'form_params'  			 => [
                     'id_marga'   		 => $request->marga,
@@ -257,6 +258,16 @@ class HomeController extends BaseController
                     'alamat'   => $request->alamat,
                 ]
         ]);
+    }
+
+    public function update_marga(Request $request){
+        $client = new \GuzzleHttp\Client();
+        $response = $client->request('POST', ENV('APP_URL_API').'marga/update_marga', [
+                 'form_params'  => [
+                     'marga'    => $request->nama_marga,
+                     'id_marga' => $request->id_marga,
+                 ]
+         ]);
     }
 
 

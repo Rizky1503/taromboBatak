@@ -40,4 +40,5 @@ Route::group(['as'=>'Member.'], function(){
 Route::group(['as'=>'Marga.'], function(){
     Route::get('/tambah_marga', 'HomeController@tambah_marga')->name('tambah_marga');
     Route::get('/store_marga', 'HomeController@store_marga')->name('store_marga');
+    Route::get('/update_marga', 'HomeController@update_marga')->name('update_marga');
 });

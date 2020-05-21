@@ -17,10 +17,6 @@
                   <th scope="col">Email</th>
                   <th scope="col">No. Telpon</th>
                   <th scope="col">Alamat</th>
-                  <th scope="col">TTL</th>
-                  <th scope="col">Provinsi Kelahiran</th>
-                  <th scope="col">Kota Kelahiran</th>
-                  <th scope="col">Orangtua Laki-Laki</th>
                   <th scope="col">Referensi oleh</th>
                   <th scope="col">Status user</th>
                   <th scope="col">Status admin</th>
@@ -35,10 +31,6 @@
                   <td>{{ $value->email }}</td>
                   <td>{{ $value->no_telpon }}</td>
                   <td>{{ $value->alamat }}</td>
-                  <td>{{ \Carbon\Carbon::parse($value->tanggal_lahir)->format('d F Y') }}</td>
-                  <td>{{ $value->provinsi_kelahiran }}</td>
-                  <td>{{ $value->kota_kelahiran }}</td>
-                  <td>{{ $value->nama_ayah }}</td>
                   <td>{{ $value->referensi }}</td>
                   <td>
                     @if($value->status_member == 'Approved')
