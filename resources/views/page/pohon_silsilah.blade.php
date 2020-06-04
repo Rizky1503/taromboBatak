@@ -12,7 +12,7 @@
 						@if($request == 'bawah')
 						<div id="wrapper">
 						    <span class="label">
-					    		{{$pohon->suami->nama}} @if($pohon->istri) dan {{$pohon->istri->nama}} @endif
+					    		{{$pohon->suami->level}}. {{$pohon->suami->nama}} @if($pohon->istri) dan {{$pohon->istri->nama}} @endif
 					    	</span>
 					    	<?php $countAnak = count($pohon->anak)?>
 					    	@if($pohon->anak)
@@ -20,7 +20,7 @@
 		                        	@foreach($pohon->anak as $key => $anak)
 			                        	<div class="entry {{$countAnak == 1 ? 'sole' : ''}}">
 							                <span class="label">
-							                	{{$anak->suami->nama}} @if($anak->istri) dan {{$anak->istri->nama}} @endif
+							                {{$anak->suami->level}}.	{{$anak->suami->nama}} @if($anak->istri) dan {{$anak->istri->nama}} @endif
 							                </span>
 							                <?php $countAnak= count($anak->anak)?>
 							                @if($anak->anak)
@@ -28,7 +28,7 @@
 								                	@foreach($anak->anak as $key => $cucu)
 								                		<div class="entry {{$countAnak == 1 ? 'sole' : ''}}">
 								                			<span class="label">
-								                				{{$cucu->suami->nama}} @if($cucu->istri) dan {{$cucu->istri->nama}} @endif
+								                				{{$cucu->suami->level}}. {{$cucu->suami->nama}} @if($cucu->istri) dan {{$cucu->istri->nama}} @endif
 								                			</span>
 								                			<?php $countAnak = count($cucu->anak)?>
 								                			@if($cucu->anak)
@@ -36,7 +36,7 @@
 								                					@foreach($cucu->anak as $key => $cicit)
 									                					<div class="entry {{$countAnak == 1 ? 'sole' : ''}}">
 									                						<span class="label">
-									                							{{$cicit->suami->nama}} @if($cicit->istri) dan {{$cicit->istri->nama}} @endif
+									                							{{$cicit->suami->level}}. {{$cicit->suami->nama}} @if($cicit->istri) dan {{$cicit->istri->nama}} @endif
 									                						</span>
 									                					</div>
 								                					@endforeach
