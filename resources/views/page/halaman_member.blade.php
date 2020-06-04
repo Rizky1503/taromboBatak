@@ -251,7 +251,7 @@
 					<div class="col-md-6">
 						<div class="form-group">
 	                        <label>username</label>
-	                        <input type="text" name="username" class="form-control" required="required" placeholder="Noel Matondang">
+	                        <input type="text" name="username" class="form-control" required="required" placeholder="Noel Matondang"> 
 	                    </div>
 					</div>
 					<div class="col-md-6">
