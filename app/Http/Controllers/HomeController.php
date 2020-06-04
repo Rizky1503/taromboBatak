@@ -95,6 +95,28 @@ class HomeController extends BaseController
     	    'member' => $data_member,
     	]);
     }
+
+    public function edit_member($id){
+        $this->title = 'Halaman Edit Member';   
+        $this->sub_title = '';
+
+        $data_marga = json_decode(file_get_contents(ENV('APP_URL_API').'member/get_marga'));
+        
+        $data_provinsi = json_decode(file_get_contents(ENV('APP_URL_API').'member/get_provinsi'));
+        
+        $data_member = json_decode(file_get_contents(ENV('APP_URL_API').'member/get_member'));
+
+        $data = json_decode(file_get_contents(ENV('APP_URL_API').'member/get_memberId/'.$id));
+
+        return view('page.edit_member')->with([
+            'page' => $this,
+            'marga' => $data_marga,
+            'provinsi' => $data_provinsi,
+            'ayah' => $data_member,
+            'member' => $data_member,
+            'data' => $data
+        ]);
+    }
  
     public function get_kota(Request $request){
         $client = new \GuzzleHttp\Client();
@@ -104,10 +126,15 @@ class HomeController extends BaseController
                 ]
         ]);
         $kota = json_decode($response->getBody());
-
-        echo "<option value=''>--Pilih Kota--</option>";
-        foreach ($kota as $key => $value) {
-            echo "<option value='".$value->kota."'>".$value->kota."</option>";
+        if ($request->id_kota) {
+            foreach ($kota as $key => $value) {
+                echo "<option value='".$value->kota."'  @if($value->kota == $request->id_kota ) selected='selected' @endif>".$value->kota."</option>";
+            }
+        }else{
+            echo "<option value=''>--Pilih Kota--</option>";
+            foreach ($kota as $key => $value) {
+                echo "<option value='".$value->kota."'>".$value->kota."</option>";
+            }
         }
     }
 
@@ -121,23 +148,29 @@ class HomeController extends BaseController
         ]);
         $ayah = json_decode($response->getBody());
 
-        echo "<option value=''>--Nama Orang Tua Laki-Laki--</option>";
-    	if ($ayah) {
-    		foreach ($ayah as $key => $value) { 
-    			echo "<option value='".$value->id_relationship."'>".$value->nama."</option>";
-    		}
-    	}elseif($request->level > 1){
-    		echo "<option value='500'>Level Orang Tua Belum Terdaftar</option>";
-    	}else{
-            echo "<option value='0'>Pusat Silsilah</option>";
+        if ($request->id_ayah) {
+           foreach ($ayah as $key => $value) { 
+                echo "<option value='".$value->id_relationship."' @if($value->id_relationship == $request->id_ayah ) selected='selected' @endif>".$value->nama."</option>";
+            } 
+        }else{
+            echo "<option value=''>--Nama Orang Tua Laki-Laki--</option>";
+        	if ($ayah) {
+        		foreach ($ayah as $key => $value) { 
+        			echo "<option value='".$value->id_relationship."'>".$value->nama."</option>";
+        		}
+        	}elseif($request->level > 1){
+        		echo "<option value='500'>Level Orang Tua Belum Terdaftar</option>";
+        	}else{
+                echo "<option value='0'>Pusat Silsilah</option>";
 
+            }
         }
     }
 
     public function store_member(Request $request){
         $client = new \GuzzleHttp\Client(['timeout' => 8]);
         
-        $response = $client->request('POST', ENV('APP_URL_API').'member/tambah_member', [
+        $response = $client->requestAsync('POST', ENV('APP_URL_API').'member/tambah_member', [
                 'form_params'  			 => [
                     'id_marga'   		 => $request->marga,
                     'nama'    			 => $request->nama,
@@ -160,9 +193,34 @@ class HomeController extends BaseController
         if($request->jenis == 'keluarga'){
             return redirect()->route('Member.HalamanMember',$request->id);
         }else{
-            $id_member = json_decode($response->getBody());
-            return redirect()->route('Member.HalamanMember',[$id_member]);
+            return redirect()->route('Member.tambah_member');
         }
+    }
+
+    public function UpdateDataMember(Request $request){
+        $client = new \GuzzleHttp\Client(['timeout' => 8]);
+        // return $request->all();
+        $promise = $client->requestAsync('POST', ENV('APP_URL_API').'member/update_member', [
+                'form_params'            => [
+                    'id_marga'           => $request->marga,
+                    'nama'               => $request->nama,
+                    'email'              => $request->email,
+                    'no_telpon'          => $request->telp,
+                    'alamat'             => $request->alamat,
+                    'provinsi_kelahiran' => $request->provinsi,
+                    'kota_kelahiran'     => $request->kota,
+                    'tanggal_lahir'      => $request->ttl,
+                    'nama_ayah'          => $request->nama_ayah,
+                    'referensi'          => $request->referensi,
+                    'jenis_kelamin'      => $request->jenis_kelamin, 
+                    'level'              => $request->level,
+                    'id_member'          => $request->id_member
+                ]
+        ]);
+        $response = $promise->wait();
+       
+        return redirect()->route('Member.member');
+        
     }
 
     public function HalamanMember($id){

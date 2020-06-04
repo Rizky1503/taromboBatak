@@ -20,6 +20,7 @@
                   <th scope="col">Referensi oleh</th>
                   <th scope="col">Status user</th>
                   <th scope="col">Status admin</th>
+                  <th scope="col"></th>
                 </tr>
               </thead>
               <tbody>
@@ -49,6 +50,7 @@
                     @endif
 
                   </td>
+                  <td><a href="{{ route('Member.edit_member',$value->id_member) }}" class="btn btn-warning" style="color: white">Edit</a></td>
                 </tr>
                 @endforeach
               </tbody>
