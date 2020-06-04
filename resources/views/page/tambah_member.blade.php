@@ -139,7 +139,7 @@
 								<div class="col-md-6">
 									<div class="form-group">
 				                        <label>Password</label>
-				                        <input type="Password" name="password" class="form-control" required="required" min="6" placeholder="***">
+				                        <input type="Password" name="password" min="6" class="form-control" required="required" min="6" placeholder="***">
 				                    </div>
 								</div>
 								<div class="col-md-12">
