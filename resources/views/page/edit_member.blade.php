@@ -118,10 +118,11 @@
 					                    <div class="input-group-prepend">
 					                      <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
 					                    </div>
-					                    <input type="text" name="ttl" placeholder="12/03/1987" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask="" im-insert="false" required="required" value="{{ \Carbon\Carbon::parse($data->tanggal_lahir)->format('d/m/Y') }}">
+					                    <input type="text" name="ttl" placeholder="12/03/1987" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask="" im-insert="false" required="required" value="{{ $data->tanggal_lahir }}">
 					                  </div>
 					                </div>
 								</div>
+
 								<div class="col-md-6">
 									<div class="form-group">
 				                        <label>Referensi oleh</label>

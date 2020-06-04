@@ -12,7 +12,7 @@
 						@if($request == 'bawah')
 						<div id="wrapper">
 						    <span class="label">
-					    		{{$pohon->suami->level}}. {{$pohon->suami->nama}} @if($pohon->istri) dan {{$pohon->istri->nama}} @endif
+					    		{{$pohon->suami->level}}. {{$pohon->suami->nama}} @if($pohon->istri) / {{$pohon->istri->nama}} @endif
 					    	</span>
 					    	<?php $countAnak = count($pohon->anak)?>
 					    	@if($pohon->anak)
@@ -20,7 +20,7 @@
 		                        	@foreach($pohon->anak as $key => $anak)
 			                        	<div class="entry {{$countAnak == 1 ? 'sole' : ''}}">
 							                <span class="label">
-							                {{$anak->suami->level}}.	{{$anak->suami->nama}} @if($anak->istri) dan {{$anak->istri->nama}} @endif
+							                {{$anak->suami->level}}.	{{$anak->suami->nama}} @if($anak->istri) / {{$anak->istri->nama}} @endif
 							                </span>
 							                <?php $countAnak= count($anak->anak)?>
 							                @if($anak->anak)
@@ -28,7 +28,7 @@
 								                	@foreach($anak->anak as $key => $cucu)
 								                		<div class="entry {{$countAnak == 1 ? 'sole' : ''}}">
 								                			<span class="label">
-								                				{{$cucu->suami->level}}. {{$cucu->suami->nama}} @if($cucu->istri) dan {{$cucu->istri->nama}} @endif
+								                				{{$cucu->suami->level}}. {{$cucu->suami->nama}} @if($cucu->istri) / {{$cucu->istri->nama}} @endif
 								                			</span>
 								                			<?php $countAnak = count($cucu->anak)?>
 								                			@if($cucu->anak)
@@ -36,7 +36,7 @@
 								                					@foreach($cucu->anak as $key => $cicit)
 									                					<div class="entry {{$countAnak == 1 ? 'sole' : ''}}">
 									                						<span class="label">
-									                							{{$cicit->suami->level}}. {{$cicit->suami->nama}} @if($cicit->istri) dan {{$cicit->istri->nama}} @endif
+									                							{{$cicit->suami->level}}. {{$cicit->suami->nama}} @if($cicit->istri) / {{$cicit->istri->nama}} @endif
 									                						</span>
 									                					</div>
 								                					@endforeach
@@ -62,7 +62,7 @@
 									<div class="branch lv1">
 										<div class="entry {{$countAyah == 1 ? 'sole' : ''}}">
 											<span class="label">
-												{{$anak->ayah[0]->nama}} dan {{$anak->ibu[0]->nama}}
+												{{$anak->ayah[0]->nama}} / {{$anak->ibu[0]->nama}}
 											</span>
 											@foreach($anak->ayah as $key => $kake)
 												<?php $countAyah = count($kake->ayah)?>
@@ -70,7 +70,7 @@
 													<div class="branch lv2">
 														<div class="entry {{$countAyah == 1 ? 'sole' : ''}}">
 															<span class="label">
-																{{$kake->ayah[0]->nama}} dan {{$kake->ibu[0]->nama}}
+																{{$kake->ayah[0]->nama}} / {{$kake->ibu[0]->nama}}
 															</span>
 															@foreach($kake->ayah as $key => $uyut)
 																<?php $countAyah = count($uyut->ayah)?>
@@ -78,7 +78,7 @@
 																	<div class="branch lv3">
 																		<div class="entry {{$countAyah == 1 ? 'sole' : ''}}">
 																			<span class="label">
-																				{{$uyut->ayah[0]->nama}} dan {{$uyut->ibu[0]->nama}}
+																				{{$uyut->ayah[0]->nama}} / {{$uyut->ibu[0]->nama}}
 																			</span>
 																		</div>
 																	</div>

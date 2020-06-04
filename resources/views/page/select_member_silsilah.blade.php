@@ -14,7 +14,7 @@
 								<div class="col-md-4">
 									<div class="form-group">
 										<label>Marga</label>
-										<select class="form-control select2bs4" required name="marga" id="marga" onchange="getmember(this.value)" style="width: 100%;">
+										<select class="form-control level" required name="marga" id="marga" onchange="getmember(this.value)" style="width: 100%;">
 										  <option value="">--Pilih Marga--</option>
 										  @foreach($marga as $key => $value)
 										  	<option value="{{ $value->id_marga }}">{{ $value->nama_marga }}</option>
@@ -25,7 +25,7 @@
 								<div class="col-md-4">
 									<div class="form-group">
 										<label>Member</label>
-										<select class="form-control select2bs4" required name="member" id="member" style="width: 100%;">
+										<select class="form-control level" required name="member" id="member" style="width: 100%;">
 										  <option value="">--Pilih Member--</option>
 										</select>
 									</div>
@@ -71,4 +71,11 @@
 		  }
 		});
 	}
+
+	$(function (){
+		$(".level").select2({
+		  tags: true,
+		  theme: 'bootstrap4'
+		});
+	})
 </script>

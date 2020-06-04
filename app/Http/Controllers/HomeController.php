@@ -107,14 +107,14 @@ class HomeController extends BaseController
         $data_member = json_decode(file_get_contents(ENV('APP_URL_API').'member/get_member'));
 
         $data = json_decode(file_get_contents(ENV('APP_URL_API').'member/get_memberId/'.$id));
-
+        
         return view('page.edit_member')->with([
             'page' => $this,
             'marga' => $data_marga,
             'provinsi' => $data_provinsi,
             'ayah' => $data_member,
             'member' => $data_member,
-            'data' => $data
+            'data' => $data[0], 
         ]);
     }
  
@@ -168,9 +168,9 @@ class HomeController extends BaseController
     }
 
     public function store_member(Request $request){
-        $client = new \GuzzleHttp\Client(['timeout' => 8]);
+        $client = new \GuzzleHttp\Client();
         
-        $response = $client->requestAsync('POST', ENV('APP_URL_API').'member/tambah_member', [
+        $promise = $client->requestAsync('POST', ENV('APP_URL_API').'member/tambah_member', [
                 'form_params'  			 => [
                     'id_marga'   		 => $request->marga,
                     'nama'    			 => $request->nama,
@@ -189,7 +189,7 @@ class HomeController extends BaseController
                     'id_member'          => $request->id_member
                 ]
         ]);
-
+        $response = $promise->wait();
         if($request->jenis == 'keluarga'){
             return redirect()->route('Member.HalamanMember',$request->id);
         }else{
@@ -198,8 +198,7 @@ class HomeController extends BaseController
     }
 
     public function UpdateDataMember(Request $request){
-        $client = new \GuzzleHttp\Client(['timeout' => 8]);
-        // return $request->all();
+        $client = new \GuzzleHttp\Client();
         $promise = $client->requestAsync('POST', ENV('APP_URL_API').'member/update_member', [
                 'form_params'            => [
                     'id_marga'           => $request->marga,

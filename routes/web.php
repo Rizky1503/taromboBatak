@@ -32,9 +32,10 @@ Route::group(['as'=>'Member.'], function(){
     Route::get('/store_member', 'HomeController@store_member')->name('store_member');
     
     Route::get('/MemberFromMarga', 'HomeController@MemberFromMarga')->name('MemberFromMarga');
-    Route::get('/SelectMemberSilsilah', 'HomeController@SelectMemberSilsilah')->name('SelectMemberSilsilah');
     
+    Route::get('/SelectMemberSilsilah', 'HomeController@SelectMemberSilsilah')->name('SelectMemberSilsilah');
     Route::get('/PohonSilsilah', 'HomeController@PohonSilsilah')->name('PohonSilsilah');
+
     Route::get('/HalamanMember/{id}', 'HomeController@HalamanMember')->name('HalamanMember');
 
     Route::get('/edit_member/{id}', 'HomeController@edit_member')->name('edit_member');
