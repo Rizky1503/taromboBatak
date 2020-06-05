@@ -20,7 +20,7 @@
 		                        	@foreach($pohon->anak as $key => $anak)
 			                        	<div class="entry {{$countAnak == 1 ? 'sole' : ''}}">
 							                <span class="label">
-							                {{ count($anak->anak) }} {{$anak->suami->level}}.	{{$anak->suami->nama}} @if($anak->istri) / {{$anak->istri->nama}} @endif
+							                {{$anak->suami->level}}.	{{$anak->suami->nama}} @if($anak->istri) / {{$anak->istri->nama}} @endif
 							                </span>							                
 							                <?php $countCucu= count($anak->anak)?>
 							                @if($anak->anak)
