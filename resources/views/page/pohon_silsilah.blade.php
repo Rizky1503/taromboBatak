@@ -14,27 +14,27 @@
 						    <span class="label">
 					    		{{$pohon->suami->level}}. {{$pohon->suami->nama}} @if($pohon->istri) / {{$pohon->istri->nama}} @endif
 					    	</span>
-					    	<?php $countAnak = count($pohon->anak)?>
+					    	<?php $countAnak= count($pohon->anak)?>
 					    	@if($pohon->anak)
 		                        <div class="branch lv1">
 		                        	@foreach($pohon->anak as $key => $anak)
 			                        	<div class="entry {{$countAnak == 1 ? 'sole' : ''}}">
 							                <span class="label">
-							                {{$anak->suami->level}}.	{{$anak->suami->nama}} @if($anak->istri) / {{$anak->istri->nama}} @endif
-							                </span>
-							                <?php $countAnak= count($anak->anak)?>
+							                {{ count($anak->anak) }} {{$anak->suami->level}}.	{{$anak->suami->nama}} @if($anak->istri) / {{$anak->istri->nama}} @endif
+							                </span>							                
+							                <?php $countCucu= count($anak->anak)?>
 							                @if($anak->anak)
 								                <div class="branch lv2">
 								                	@foreach($anak->anak as $key => $cucu)
-								                		<div class="entry {{$countAnak == 1 ? 'sole' : ''}}">
+								                		<div class="entry {{$countCucu == 1 ? 'sole' : ''}}">
 								                			<span class="label">
 								                				{{$cucu->suami->level}}. {{$cucu->suami->nama}} @if($cucu->istri) / {{$cucu->istri->nama}} @endif
 								                			</span>
-								                			<?php $countAnak = count($cucu->anak)?>
+								                			<?php $countCicit = count($cucu->anak)?>
 								                			@if($cucu->anak)
 								                				<div class="branch lv3">
 								                					@foreach($cucu->anak as $key => $cicit)
-									                					<div class="entry {{$countAnak == 1 ? 'sole' : ''}}">
+									                					<div class="entry {{$countCicit == 1 ? 'sole' : ''}}">
 									                						<span class="label">
 									                							{{$cicit->suami->level}}. {{$cicit->suami->nama}} @if($cicit->istri) / {{$cicit->istri->nama}} @endif
 									                						</span>
@@ -104,6 +104,7 @@
 
 
 <script src="{{ asset('public/theme/plugins/jquery/jquery.min.js')}}"></script>
+
 <link rel="stylesheet" href="{{ asset('css/tree.css') }}">
 
 <script type="text/javascript">

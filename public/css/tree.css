@@ -38,7 +38,7 @@ body {
 
 .entry {
     position: relative;
-    min-height: 30px;
+    min-height: 46px;
 }
 .entry:before {
     content: "";

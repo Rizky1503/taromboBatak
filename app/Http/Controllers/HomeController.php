@@ -227,7 +227,6 @@ class HomeController extends BaseController
         $this->sub_title = '';
 
         $data = json_decode(file_get_contents(ENV('APP_URL_API').'member/GetMemberFromId/'.$id));
-        // dd($data);
         $data_marga = json_decode(file_get_contents(ENV('APP_URL_API').'member/get_marga'));
         
         $data_provinsi = json_decode(file_get_contents(ENV('APP_URL_API').'member/get_provinsi'));
@@ -287,7 +286,6 @@ class HomeController extends BaseController
                 ]
         ]);
         $pohon = json_decode($response->getBody());
-        // dd($pohon);
         return view('page.pohon_silsilah')->with([
     	    'page' => $this,
     	    'pohon' => $pohon,
