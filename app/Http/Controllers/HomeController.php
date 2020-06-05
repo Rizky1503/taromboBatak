@@ -227,7 +227,7 @@ class HomeController extends BaseController
         $this->sub_title = '';
 
         $data = json_decode(file_get_contents(ENV('APP_URL_API').'member/GetMemberFromId/'.$id));
-
+        // dd($data);
         $data_marga = json_decode(file_get_contents(ENV('APP_URL_API').'member/get_marga'));
         
         $data_provinsi = json_decode(file_get_contents(ENV('APP_URL_API').'member/get_provinsi'));
